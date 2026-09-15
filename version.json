@@ -1,5 +1,22 @@
 {
   "version": "4.0.1",
-  "changelog": ["New feature", "Bug fix"],
-  "release_date": "2026-09-16"
+  "changelog": [
+    "Auto-update system",
+    "Warn-only integrity",
+    "Stable HWID"
+  ],
+  "release_date": "2026-09-15",
+  "files": [
+    "cosmicloaderFORSALE.py",
+    "security.py",
+    "updater.py",
+    "tracking.py",
+    "dns_fix.py",
+    "decoder_encoder.py",
+    "url_remover.py",
+    "proxy_scraper.py",
+    "sms_bomber.py",
+    "separator.py",
+    "Dev_Id_checker.py"
+  ]
 }
