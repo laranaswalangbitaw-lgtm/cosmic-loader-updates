@@ -66,21 +66,44 @@ def _get_hwid():
     return hwid
 
 
+
 def _notify_admin(message, urgent=False):
-    """Send Telegram notification sa admin."""
-    if not ADMIN_BOT_TOKEN or not ADMIN_CHAT_ID:
-        return False
+    """Send Telegram notification to admin."""
     try:
-        url = f"https://api.telegram.org/bot{ADMIN_BOT_TOKEN}/sendMessage"
-        prefix = "🚨 URGENT" if urgent else "📢"
-        requests.post(url, json={
-            "chat_id": ADMIN_CHAT_ID,
-            "text": f"{prefix} <b>COSMIC SECURITY</b>\n\n{message}",
-            "parse_mode": "HTML",
+        import requests
+        from pathlib import Path as _P
+        
+        env_file = _P("/storage/emulated/0/test_Tools2/.env")
+        bot_token = ""
+        admin_id = ""
+        
+        if env_file.exists():
+            for line in env_file.read_text().split("\n"):
+                line = line.strip()
+                if line.startswith("BOT_TOKEN="):
+                    bot_token = line.split("=", 1)[1].strip()
+                elif line.startswith("ADMIN_ID="):
+                    admin_id = line.split("=", 1)[1].strip()
+        
+        if not bot_token or not admin_id:
+            return False
+        
+        prefix = "URGENT" if urgent else "NOTICE"
+        full_text = prefix + " - COSMIC SECURITY\n\n" + str(message)
+        
+        url = "https://api.telegram.org/bot" + bot_token + "/sendMessage"
+        resp = requests.post(url, json={
+            "chat_id": admin_id,
+            "text": full_text,
             "disable_notification": not urgent,
         }, timeout=10)
-        return True
-    except Exception:
+        
+        return resp.status_code == 200
+    except Exception as e:
+        try:
+            print("Notify error: " + str(e))
+        except Exception:
+            pass
         return False
 
 
