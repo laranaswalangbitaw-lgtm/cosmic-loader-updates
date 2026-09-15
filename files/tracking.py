@@ -175,7 +175,9 @@ def register_user(username=None, key=None):
 
 
 def is_suspended(hwid=None):
-    """Check if user is suspended."""
+    """Check if user is suspended. ALWAYS FALSE (disabled)."""
+    if not SUSPEND_ENABLED:
+        return False, ""
     if hwid is None:
         hwid = _get_hwid()
     data = _load_json(TRACK_FILE, {"users": {}})
