@@ -5858,18 +5858,66 @@ def main():
         print(f"\n  {_A_ERROR}✖  Access denied. Exiting.{_A_RST}\n")
         sys.exit(1)
 
-    # ─── AUTO-UPDATE + ANNOUNCEMENT BANNER (after login) ───
+    # ─── AUTO-UPDATE + ANNOUNCEMENT (after login) ───
     if _UPDATER_AVAILABLE:
         try:
             update_info = _updater.check_updates(force=True)
-            if update_info.get("announcement") or update_info.get("update_available"):
+            
+            # Show announcement banner first
+            if update_info.get("announcement"):
                 _updater.show_update_banner(update_info)
-                print()
                 print(f"  {_A_DIM}Press Enter to continue...{_A_RST}")
                 try:
                     input()
                 except (KeyboardInterrupt, EOFError):
                     pass
+            
+            # Auto-apply code updates
+            if update_info.get("update_available"):
+                print()
+                print(f"  {_A_WARNING}⚠  Update {update_info['latest_version']} available!{_A_RST}")
+                print(f"  {_A_DIM}Auto-downloading updates from GitHub...{_A_RST}")
+                print()
+                
+                try:
+                    ok, updated, failed = _updater.apply_update(
+                        update_info.get("files_to_update")
+                    )
+                    
+                    if ok:
+                        print()
+                        print(f"  {_A_SUCCESS}✅ Updated {len(updated)} file(s){_A_RST}")
+                        for f in updated:
+                            print(f"  {_A_DIM}   • {f}{_A_RST}")
+                        
+                        if failed:
+                            print(f"  {_A_WARNING}⚠  {len(failed)} file(s) failed:{_A_RST}")
+                            for f in failed:
+                                print(f"  {_A_DIM}   • {f}{_A_RST}")
+                        
+                        # Regenerate integrity para walang tamper warning
+                        try:
+                            import security
+                            security.generate_integrity()
+                            print(f"  {_A_DIM}🔒 Integrity regenerated{_A_RST}")
+                        except Exception:
+                            pass
+                        
+                        print()
+                        print(f"  {_A_SUCCESS}{_A_BOLD}✅ Update applied! Restart mo yung loader:{_A_RST}")
+                        print(f"  {_A_BRIGHT}   python3 cosmicloaderFORSALE.py{_A_RST}")
+                        print()
+                        try:
+                            input(f"  {_A_DIM}Press Enter to exit...{_A_RST}")
+                        except (KeyboardInterrupt, EOFError):
+                            pass
+                        sys.exit(0)
+                    else:
+                        print(f"  {_A_WARNING}⚠  Update failed — continuing with old version{_A_RST}")
+                        time.sleep(2)
+                except Exception as e:
+                    print(f"  {_A_WARNING}⚠  Update error: {e}{_A_RST}")
+                    time.sleep(2)
         except Exception:
             pass
 
