@@ -1,7 +1,8 @@
 📢 UPDATE v4.0.5
 
 Fixed:
-• Auto-reset tamper count after update
-• No more false suspension
+• Auto-reset tamper after update
+• No more false suspensions
+• Warn-only integrity
 
 Restart mo lang yung loader.

@@ -281,10 +281,11 @@ def enforce_integrity():
 #  SOURCE HIDING — only show to owner
 # ═══════════════════════════════════════════════════════════
 def require_owner():
-    """Block non-owner from viewing source."""
+    """Warn non-owner from viewing source (no exit)."""
     if not is_owner():
-        print("\n  \033[38;2;255;100;120m✖  Access denied. Owner only.\033[0m\n")
-        sys.exit(1)
+        print("\n  \033[38;2;255;200;100m⚠  Owner-only feature.\033[0m\n")
+        return False
+    return True
 
 
 # ═══════════════════════════════════════════════════════════
@@ -293,10 +294,8 @@ def require_owner():
 if __name__ != "__main__":
     try:
         enforce_integrity()
-    except SystemExit:
-        raise
     except Exception:
-        pass
+        pass  # Silent fail — don't block loader
 
 
 if __name__ == "__main__":

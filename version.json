@@ -1,7 +1,8 @@
 {
   "version": "4.0.5",
   "changelog": [
-    "Auto-reset tamper after update"
+    "Auto-reset tamper",
+    "Warn-only integrity"
   ],
   "release_date": "2026-09-15",
   "files": [
