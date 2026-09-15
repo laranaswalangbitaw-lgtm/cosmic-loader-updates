@@ -1,7 +1,7 @@
-📢 NEW VERSION 4. RELEASED!
+📢 NEW VERSION 4.0.4 RELEASED!
 
 Changelog:
-• New Update Fix all
+• Update Fix all Errors
 
 Auto-updating on next run.
 Contact @LEGITCosmicDev2nd for questions.

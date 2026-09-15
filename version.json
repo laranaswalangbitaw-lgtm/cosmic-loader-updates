@@ -1,6 +1,6 @@
 {
-  "version": "4.",
-  "changelog": ["New Update Fix all"],
+  "version": "4.0.4",
+  "changelog": ["Update Fix all Errors"],
   "release_date": "2026-09-15",
   "files": [
     "cosmicloaderFORSALE.py",
