@@ -1,0 +1,19 @@
+{
+  "keys": {
+    "COSMIC-VRMT-VOWC-X47M-IOLG": {
+      "key": "COSMIC-VRMT-VOWC-X47M-IOLG",
+      "duration_code": "permanent",
+      "duration_label": "Permanent",
+      "created_at": "2026-09-15T20:54:18.051607",
+      "expires_at": null,
+      "uses": 0,
+      "bound_to": null,
+      "bound_at": null,
+      "revoked": false,
+      "note": "Thank you",
+      "price": "1",
+      "created_by": 8792731943,
+      "order_id": "ORD-260915-IOLG"
+    }
+  }
+}
