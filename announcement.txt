@@ -1,8 +1,8 @@
-📢 UPDATE v4.0.6
+📢 UPDATE v4.0.8
 
 Fixed:
-• Tamper exit — hindi na nag-eexit
-• HWID tracking — matatag na
-• Reset tamper — gumagana na
+• Same key working across updates
+• Bot = Source of truth
+• Loader = Read-only validator
 
 Restart mo lang yung loader.

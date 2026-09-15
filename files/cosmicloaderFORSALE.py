@@ -177,8 +177,8 @@ except Exception as _e:
 #  COSMIC KEY SYSTEM — Storage + Validation
 # ══════════════════════════════════════════════════════════════════════════
 
-KEYS_FILE_PATH = Path("/storage/emulated/0/test_Tools2/keys.json")
-USER_SESSION_PATH = Path("/storage/emulated/0/test_Tools2/.user_session")
+KEYS_FILE_PATH = Path("/storage/emulated/0/test_Tools2/keys.json")  # ← BOT SOURCE
+USER_SESSION_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/.user_session")
 SESSION_LOG_PATH = Path("session_log.txt")
 _KEY_LOCK = threading.Lock()
 

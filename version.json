@@ -1,9 +1,8 @@
 {
-  "version": "4.0.6",
+  "version": "4.0.8",
   "changelog": [
-    "Fixed tamper exit",
-    "Fixed HWID tracking",
-    "Auto-reset working"
+    "Same key works across updates",
+    "Bot as source of truth"
   ],
   "release_date": "2026-09-15",
   "files": [
