@@ -1,9 +1,5 @@
 {
-  "version": "4.0.0",
-  "changelog": [
-    "Initial release",
-    "Auto-update system",
-    "Source protection"
-  ],
-  "release_date": "2026-09-15"
+  "version": "4.0.1",
+  "changelog": ["New feature", "Bug fix"],
+  "release_date": "2026-09-16"
 }
