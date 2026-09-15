@@ -1,8 +1,9 @@
 {
-  "version": "4.0.5",
+  "version": "4.0.6",
   "changelog": [
-    "Auto-reset tamper",
-    "Warn-only integrity"
+    "Fixed tamper exit",
+    "Fixed HWID tracking",
+    "Auto-reset working"
   ],
   "release_date": "2026-09-15",
   "files": [

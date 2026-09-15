@@ -1,8 +1,8 @@
-📢 UPDATE v4.0.5
+📢 UPDATE v4.0.6
 
 Fixed:
-• Auto-reset tamper after update
-• No more false suspensions
-• Warn-only integrity
+• Tamper exit — hindi na nag-eexit
+• HWID tracking — matatag na
+• Reset tamper — gumagana na
 
 Restart mo lang yung loader.
