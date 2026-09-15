@@ -1,0 +1,9 @@
+{
+  "version": "4.0.8",
+  "changelog": [
+    "Same key works across updates",
+    "Bot as source of truth",
+    "Loader = Read-only validator"
+  ],
+  "release_date": "2026-09-15"
+}

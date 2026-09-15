@@ -145,6 +145,7 @@ def apply_update(files_to_update=None):
             if r.status_code == 200:
                 new_data = r.json()
                 with open(VERSION_FILE, "w", encoding="utf-8") as f:
+                    import json
                     json.dump(new_data, f, indent=2)
         except Exception:
             pass
