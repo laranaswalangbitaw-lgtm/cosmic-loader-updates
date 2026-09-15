@@ -1,10 +1,6 @@
 {
-  "version": "4.0.1",
-  "changelog": [
-    "Auto-update system",
-    "Warn-only integrity",
-    "Stable HWID"
-  ],
+  "version": "4.0.3",
+  "changelog": ["New Update Fix all Errors"],
   "release_date": "2026-09-15",
   "files": [
     "cosmicloaderFORSALE.py",
