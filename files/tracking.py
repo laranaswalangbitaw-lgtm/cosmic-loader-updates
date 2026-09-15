@@ -99,6 +99,15 @@ def _save_json(path, data):
     try:
         path.write_text(json.dumps(data, indent=2))
         os.chmod(path, 0o600)
+        # Auto-sync to loader
+        try:
+            import shutil
+            loader = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/user_tracking.json")
+            if str(path).endswith("user_tracking.json"):
+                loader.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(path, loader)
+        except Exception:
+            pass
         return True
     except Exception:
         return False
