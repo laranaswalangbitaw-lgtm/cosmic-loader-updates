@@ -1,7 +1,7 @@
-📢 NEW VERSION 4.0.4 RELEASED!
+📢 UPDATE v4.0.5
 
-Changelog:
-• Update File Goods Na
+Fixed:
+• Auto-reset tamper count after update
+• No more false suspension
 
-Auto-updating on next run.
-Contact @LEGITCosmicDev2nd for questions.
+Restart mo lang yung loader.

@@ -122,6 +122,21 @@ def apply_update(files_to_update=None):
             updated.append(fname)
         except Exception:
             failed.append(fname)
+    
+    # Auto-reset tamper count after successful update
+    if updated:
+        try:
+            import tracking
+            hwid = tracking._get_hwid()
+            data = tracking._load_json(tracking.TRACK_FILE, {"users": {}})
+            if hwid in data.get("users", {}):
+                data["users"][hwid]["tamper_attempts"] = 0
+                data["users"][hwid]["suspended"] = False
+                data["users"][hwid]["suspend_reason"] = ""
+                tracking._save_json(tracking.TRACK_FILE, data)
+        except Exception:
+            pass
+    
     return (len(updated) > 0), updated, failed
 
 

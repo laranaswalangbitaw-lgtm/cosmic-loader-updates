@@ -1,6 +1,8 @@
 {
-  "version": "4.0.4",
-  "changelog": ["Update File Goods Na"],
+  "version": "4.0.5",
+  "changelog": [
+    "Auto-reset tamper after update"
+  ],
   "release_date": "2026-09-15",
   "files": [
     "cosmicloaderFORSALE.py",
