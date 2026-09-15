@@ -1,11 +1,2 @@
-📢 WELCOME TO COSMIC LOADER!
-
-Version 4.0.0 — Stable Release
-Contact @LEGITCosmicDev2nd for license keys.
-
-━━━━━━━━━━━━━━━━━━━━━━
-🔥 NEW FEATURES:
-  • Auto-update system
-  • Source protection
-  • Multi-tool support
-━━━━━━━━━━━━━━━━━━━━━━
+📢 NEW VERSION 4.0.1 RELEASED!
+Contact @LEGITCosmicDev2nd for update.
