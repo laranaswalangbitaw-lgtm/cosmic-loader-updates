@@ -177,8 +177,8 @@ except Exception as _e:
 #  COSMIC KEY SYSTEM — Storage + Validation
 # ══════════════════════════════════════════════════════════════════════════
 
-KEYS_FILE_PATH = Path("/storage/emulated/0/test_Tools2/keys.json")  # ← BOT SOURCE
-USER_SESSION_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/.user_session")
+KEYS_FILE_PATH = Path("/storage/emulated/0/test_Tools2/keys.json")
+USER_SESSION_PATH = Path("/storage/emulated/0/test_Tools2/.user_session")
 SESSION_LOG_PATH = Path("session_log.txt")
 _KEY_LOCK = threading.Lock()
 
@@ -658,23 +658,13 @@ def _cosmic_loader():
 
 def key_login() -> bool:
     """Cosmic v4.0 key login — same flow as key system."""
-    # ─── SUSPEND CHECK ───
+    # ─── SILENT SUSPEND CHECK ───
     if _TRACKING_AVAILABLE:
         try:
             suspended, reason = _tracking.is_suspended()
             if suspended:
-                w = 66
-                print()
-                print(f"  {_A_ERROR}┏{'━' * w}┓{_A_RST}")
-                print(f"  {_A_ERROR}┃{_A_RST}{_A_BOLD}{_A_BRIGHT}{'🚫 ACCOUNT SUSPENDED'.center(w)}{_A_RST}{_A_ERROR}┃{_A_RST}")
-                print(f"  {_A_ERROR}┣{'━' * w}┫{_A_RST}")
-                print(f"  {_A_ERROR}┃{_A_RST}  {_A_DIM}Reason:{_A_RST} {_A_WHITE}{reason}{_A_RST}")
-                print(f"  {_A_ERROR}┃{_A_RST}")
-                print(f"  {_A_ERROR}┃{_A_RST}  {_A_DIM}Contact @LEGITCosmicDev2nd to appeal.{_A_RST}")
-                print(f"  {_A_ERROR}┗{'━' * w}┛{_A_RST}")
-                print()
-                input(f"  {_A_DIM}Press Enter to exit...{_A_RST}")
-                sys.exit(1)
+                # Silent block — no warning shown
+                sys.exit(0)
         except Exception:
             pass
 

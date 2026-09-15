@@ -1,8 +1,9 @@
-📢 UPDATE v4.0.8
+📢 UPDATE v4.1.0
 
-Fixed:
-• Same key working across updates
-• Bot = Source of truth
-• Loader = Read-only validator
+Changes:
+• Silent suspend (no warning)
+• Manual suspend only
+• Enhanced notifications (username shown)
+• Auto-expire suspensions
 
 Restart mo lang yung loader.

@@ -233,26 +233,23 @@ def report_tamper(files_modified, username=None, key=None):
     user["last_tamper"] = datetime.now().isoformat()
     user["last_tamper_files"] = files_modified
     
-    # Only suspend if enabled
-    if SUSPEND_ENABLED:
-        user["suspended"] = True
-        user["suspend_reason"] = f"Tamper detected ({user['tamper_attempts']}x)"
-        user["suspend_date"] = datetime.now().isoformat()
+    # NO AUTO-SUSPEND — notify admin lang
+    pass
     
     _save_json(TRACK_FILE, data)
     
     # Notify admin
     msg = (
         f"<b>🚨 TAMPER DETECTED</b>\n\n"
-        f"👤 User: <code>{username or 'unknown'}</code>\n"
+        f"👤 Username: <b>{username or 'unknown'}</b>\n"
         f"🆔 HWID: <code>{hwid}</code>\n"
         f"🔑 Key: <code>{key or 'unknown'}</code>\n\n"
         f"📁 Modified files:\n"
     )
     for f in files_modified[:5]:
         msg += f"  • <code>{f}</code>\n"
-    msg += f"\n⚠️ <b>Auto-suspended</b>\n"
-    msg += f"Unban via bot panel."
+    msg += f"\n⚠️ <b>User needs manual review</b>\n"
+    msg += f"Use bot panel to suspend if needed."
     
     _notify_admin(msg, urgent=True)
     return True
@@ -278,12 +275,12 @@ def report_leak_detected(leaked_to=None, extra_info=None):
     
     msg = (
         f"<b>🚨 LEAK DETECTED</b>\n\n"
+        f"👤 Username: <b>{user.get('username', 'unknown')}</b>\n"
         f"🆔 HWID: <code>{hwid}</code>\n"
-        f"👤 User: <code>{user.get('username', 'unknown')}</code>\n"
         f"🔑 Keys used: {len(user.get('keys_used', []))}\n"
         f"📤 Leaked to: <code>{leaked_to or 'unknown'}</code>\n"
         f"ℹ️ {extra_info or 'N/A'}\n\n"
-        f"⚠️ <b>Auto-suspended</b>"
+        f"⚠️ <b>User needs manual review</b>"
     )
     _notify_admin(msg, urgent=True)
     return True

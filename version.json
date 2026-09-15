@@ -1,8 +1,9 @@
 {
-  "version": "4.0.8",
+  "version": "4.1.0",
   "changelog": [
-    "Same key works across updates",
-    "Bot as source of truth"
+    "Silent suspend check",
+    "Manual suspend only",
+    "Enhanced notifications"
   ],
   "release_date": "2026-09-15",
   "files": [
