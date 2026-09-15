@@ -22,6 +22,19 @@ BASE_DIR = Path(__file__).parent.resolve()
 BACKUP_DIR = BASE_DIR / ".backup"
 CURRENT_VERSION = "4.0.0"
 
+# Files NEVER to auto-update (user data)
+EXCLUDED_FILES = [
+    "keys.json",
+    "user_tracking.json",
+    "audit.log",
+    ".user_session",
+    ".owner",
+    ".bot_owner",
+    ".hwid",
+    ".integrity",
+    "version.json",
+]
+
 UPDATABLE_FILES = [
     "cosmicloaderFORSALE.py",
     "security.py",
