@@ -20,7 +20,7 @@ FILES_BASE = f"{BASE_URL}/files"
 
 BASE_DIR = Path(__file__).parent.resolve()
 BACKUP_DIR = BASE_DIR / ".backup"
-CURRENT_VERSION = "4.0.0"
+CURRENT_VERSION = "4.0.8"
 
 # Files NEVER to auto-update (user data)
 EXCLUDED_FILES = [
@@ -137,6 +137,18 @@ def apply_update(files_to_update=None):
         except Exception:
             pass
     
+    # Auto-update version.json after successful update
+    if len(updated) > 0:
+        try:
+            import requests
+            r = requests.get(UPDATE_URL, timeout=10)
+            if r.status_code == 200:
+                new_data = r.json()
+                with open(VERSION_FILE, "w", encoding="utf-8") as f:
+                    json.dump(new_data, f, indent=2)
+        except Exception:
+            pass
+
     return (len(updated) > 0), updated, failed
 
 
