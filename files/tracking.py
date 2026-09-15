@@ -13,6 +13,10 @@ from datetime import datetime
 
 BASE_DIR = Path(__file__).parent.resolve()
 TRACK_FILE = BASE_DIR / "user_tracking.json"
+
+# ─── SUSPEND CONTROL ───
+SUSPEND_ENABLED = False  # ← Auto-suspend DISABLED
+
 SUSPEND_FILE = BASE_DIR / "suspended_users.json"
 
 # ═══════════════════════════════════════════════════════════
@@ -194,9 +198,12 @@ def report_tamper(files_modified, username=None, key=None):
     user["tamper_attempts"] = user.get("tamper_attempts", 0) + 1
     user["last_tamper"] = datetime.now().isoformat()
     user["last_tamper_files"] = files_modified
-    user["suspended"] = True
-    user["suspend_reason"] = f"Tamper detected ({user['tamper_attempts']}x)"
-    user["suspend_date"] = datetime.now().isoformat()
+    
+    # Only suspend if enabled
+    if SUSPEND_ENABLED:
+        user["suspended"] = True
+        user["suspend_reason"] = f"Tamper detected ({user['tamper_attempts']}x)"
+        user["suspend_date"] = datetime.now().isoformat()
     
     _save_json(TRACK_FILE, data)
     
