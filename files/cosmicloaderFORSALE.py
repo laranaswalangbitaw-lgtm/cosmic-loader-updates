@@ -177,7 +177,31 @@ except Exception as _e:
 #  COSMIC KEY SYSTEM — Storage + Validation
 # ══════════════════════════════════════════════════════════════════════════
 
-KEYS_FILE_PATH = Path("/storage/emulated/0/test_Tools2/keys.json")
+# CLOUD KEYS (source of truth)
+CLOUD_KEYS_URL = "https://raw.githubusercontent.com/laranaswalangbitaw-lgtm/cosmic-loader-updates/main/files/keys.json"
+
+# LOCAL CACHE
+KEYS_FILE_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/keys.json")
+
+
+def _fetch_cloud_keys():
+    """Download keys from GitHub."""
+    try:
+        import requests
+        r = requests.get(CLOUD_KEYS_URL, timeout=10)
+        if r.status_code == 200:
+            data = r.json()
+            if "keys" in data:
+                # Save local cache
+                try:
+                    KEYS_FILE_PATH.parent.mkdir(parents=True, exist_ok=True)
+                    KEYS_FILE_PATH.write_text(r.text)
+                except Exception:
+                    pass
+                return data
+    except Exception:
+        pass
+    return None
 USER_SESSION_PATH = Path("/storage/emulated/0/test_Tools2/.user_session")
 SESSION_LOG_PATH = Path("session_log.txt")
 _KEY_LOCK = threading.Lock()
@@ -186,15 +210,18 @@ _USER_KEY_SESSION = {"key": None, "expires_at": None, "uses": 0, "username": Non
 
 
 def _keys_load() -> dict:
+    """Load keys — CLOUD FIRST (source of truth)."""
+    # Try cloud first
+    cloud_data = _fetch_cloud_keys()
+    if cloud_data and cloud_data.get("keys"):
+        return cloud_data
+    
+    # Fallback to local cache
     if not KEYS_FILE_PATH.exists():
         return {"keys": {}}
     try:
-        with _KEY_LOCK:
-            with open(KEYS_FILE_PATH, "r", encoding="utf-8") as f:
-                d = json.load(f)
-        if "keys" not in d:
-            d["keys"] = {}
-        return d
+        with open(KEYS_FILE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
     except Exception:
         return {"keys": {}}
 
