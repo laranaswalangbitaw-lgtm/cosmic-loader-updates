@@ -81,6 +81,61 @@ def _save_user_session(username, key):
         pass
 
 
+def report_key_use(key_str):
+    """Report key usage to GitHub (increment uses counter)."""
+    try:
+        import requests
+        import json
+        from pathlib import Path as _P
+        
+        # Load GitHub token from config
+        token_file = _P("/storage/emulated/0/COSMIC-LOADER-v4.0/.github_token")
+        if not token_file.exists():
+            return False
+        
+        GITHUB_TOKEN = token_file.read_text().strip()
+        if not GITHUB_TOKEN:
+            return False
+        
+        REPO = "laranaswalangbitaw-lgtm/cosmic-loader-updates"
+        FILE_PATH = "files/keys.json"
+        
+        api_url = f"https://api.github.com/repos/{REPO}/contents/{FILE_PATH}"
+        headers = {
+            "Authorization": f"token {GITHUB_TOKEN}",
+            "Accept": "application/vnd.github.v3+json",
+        }
+        
+        r = requests.get(api_url, headers=headers, timeout=10)
+        if r.status_code != 200:
+            return False
+        
+        file_data = r.json()
+        import base64
+        content = base64.b64decode(file_data["content"]).decode("utf-8")
+        keys_data = json.loads(content)
+        
+        if key_str in keys_data.get("keys", {}):
+            current_uses = keys_data["keys"][key_str].get("uses", 0)
+            keys_data["keys"][key_str]["uses"] = current_uses + 1
+            keys_data["keys"][key_str]["last_used"] = datetime.now().isoformat()
+            
+            new_content = json.dumps(keys_data, indent=2)
+            new_content_b64 = base64.b64encode(new_content.encode()).decode()
+            
+            update_data = {
+                "message": f"Report key use: {key_str}",
+                "content": new_content_b64,
+                "sha": file_data["sha"],
+            }
+            
+            r2 = requests.put(api_url, headers=headers, json=update_data, timeout=10)
+            return r2.status_code == 200
+    except Exception:
+        pass
+    return False
+
+
 def _notify_admin(message, urgent=False):
     """Send Telegram notification to admin."""
     try:
