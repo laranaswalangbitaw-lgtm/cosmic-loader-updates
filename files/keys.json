@@ -59,6 +59,21 @@
       "price": "5",
       "created_by": 8792731943,
       "order_id": "ORD-260915-MQ7D"
+    },
+    "COSMIC-DD1W-MWIU-2E62-74L3": {
+      "key": "COSMIC-DD1W-MWIU-2E62-74L3",
+      "duration_code": "trial",
+      "duration_label": "1 Hour Trial",
+      "created_at": "2026-09-16T19:24:51.960407",
+      "expires_at": "2026-09-16T20:24:51.960407",
+      "uses": 0,
+      "bound_to": null,
+      "bound_at": null,
+      "revoked": false,
+      "note": "Test",
+      "price": "1",
+      "created_by": 8792731943,
+      "order_id": "ORD-260916-74L3"
     }
   }
 }
