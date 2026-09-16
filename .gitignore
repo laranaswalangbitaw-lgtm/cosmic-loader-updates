@@ -1,0 +1,13 @@
+# Sensitive
+.hwid
+.integrity
+.secret
+audit.log
+user_tracking.json
+keys.json
+backups/
+__pycache__/
+*.pyc
+.update_cache
+.user_session
+.github_token

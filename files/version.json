@@ -1,5 +1,22 @@
 {
   "version": "4.1.3",
-  "changelog": ["Force cloud fetch", "Fix invalid key", "Enhanced notifications"],
-  "release_date": "2026-09-16"
+  "changelog": [
+    "Enhanced tamper notifications",
+    "Complete user info",
+    "Save session on login"
+  ],
+  "release_date": "2026-09-16",
+  "files": [
+    "cosmicloaderFORSALE.py",
+    "security.py",
+    "updater.py",
+    "tracking.py",
+    "dns_fix.py",
+    "decoder_encoder.py",
+    "url_remover.py",
+    "proxy_scraper.py",
+    "sms_bomber.py",
+    "separator.py",
+    "Dev_Id_checker.py"
+  ]
 }
