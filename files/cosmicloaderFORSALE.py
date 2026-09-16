@@ -5845,6 +5845,41 @@ def run_devid_checker():
             time.sleep(1)
 
 
+def run_proxy_scraper():
+    """Wrapper: launch proxy scraper module."""
+    if _PROXY_SCRAPER_AVAILABLE:
+        return _proxy_scraper.run_proxy_scraper()
+    print("Proxy scraper not available")
+
+
+def run_sms_bomber():
+    """Wrapper: launch SMS bomber module."""
+    if _SMS_BOMBER_AVAILABLE:
+        return _sms_bomber.run_sms_bomber()
+    print("SMS bomber not available")
+
+
+def run_separator():
+    """Wrapper: launch separator module."""
+    if _SEPARATOR_AVAILABLE:
+        return _separator.run_separator()
+    print("Separator not available")
+
+
+def run_decoder_encoder_menu():
+    """Wrapper: launch decoder/encoder module."""
+    if _DEC_ENC_AVAILABLE:
+        return _dec_enc.run_decoder_encoder_menu()
+    print("Decoder/Encoder not available")
+
+
+def run_url_remover():
+    """Wrapper: launch URL remover module."""
+    if _URL_RM_AVAILABLE:
+        return _url_rm.run_url_remover()
+    print("URL Remover not available")
+
+
 def main():
     Path("Combo").mkdir(exist_ok=True)
     Path("Results").mkdir(exist_ok=True)
