@@ -20,7 +20,7 @@ FILES_BASE = f"{BASE_URL}/files"
 
 BASE_DIR = Path(__file__).parent.resolve()
 BACKUP_DIR = BASE_DIR / ".backup"
-CURRENT_VERSION = "4.0.8"
+CURRENT_VERSION = "4.1.3"
 
 # Files NEVER to auto-update (user data)
 EXCLUDED_FILES = [

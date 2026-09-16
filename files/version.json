@@ -1,9 +1,5 @@
 {
-  "version": "4.0.8",
-  "changelog": [
-    "Same key works across updates",
-    "Bot as source of truth",
-    "Loader = Read-only validator"
-  ],
-  "release_date": "2026-09-15"
+  "version": "4.1.3",
+  "changelog": ["Force cloud fetch", "Fix invalid key", "Enhanced notifications"],
+  "release_date": "2026-09-16"
 }
