@@ -1,13 +1,28 @@
-# Sensitive
+# Sensitive files
 .hwid
 .integrity
 .secret
 audit.log
 user_tracking.json
 keys.json
+files/keys.json
 backups/
 __pycache__/
 *.pyc
 .update_cache
 .user_session
 .github_token
+
+# Root duplicates (keep only in files/)
+/cosmicloaderFORSALE.py
+/Dev_Id_checker.py
+/decoder_encoder.py
+/proxy_scraper.py
+/security.py
+/separator.py
+/sms_bomber.py
+/tracking.py
+/updater.py
+/url_remover.py
+/version.json
+/announcement.txt

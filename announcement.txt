@@ -1,9 +1,0 @@
-📢 UPDATE v4.1.0
-
-Changes:
-• Silent suspend (no warning)
-• Manual suspend only
-• Enhanced notifications (username shown)
-• Auto-expire suspensions
-
-Restart mo lang yung loader.
