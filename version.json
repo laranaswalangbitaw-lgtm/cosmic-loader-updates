@@ -1,7 +1,8 @@
 {
-  "version": "4.1.5",
+  "version": "4.1.6",
   "changelog": [
-    "Use GitHub API for fresh keys (no cache)"
+    "Use GitHub API for fresh keys",
+    "No more cache delay"
   ],
   "release_date": "2026-09-17",
   "files": [
