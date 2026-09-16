@@ -67,6 +67,20 @@ def _get_hwid():
 
 
 
+def _save_user_session(username, key):
+    """Save username + key for tamper reports."""
+    try:
+        import json as _json
+        session_path = BASE_DIR / ".user_session"
+        session_path.parent.mkdir(parents=True, exist_ok=True)
+        session_path.write_text(_json.dumps({
+            "username": username,
+            "key": key,
+        }))
+    except Exception:
+        pass
+
+
 def _notify_admin(message, urgent=False):
     """Send Telegram notification to admin."""
     try:
@@ -220,30 +234,53 @@ def unsuspend_user(hwid):
 #  ANTI-TAMPER REPORTING
 # ═══════════════════════════════════════════════════════════
 def report_tamper(files_modified, username=None, key=None):
-    """Report na may nag-edit ng source."""
+    """Report tamper + notify admin via Telegram."""
     hwid = _get_hwid()
+    
+    # Try to get username + key from session file
+    if not username or username == "unknown":
+        try:
+            session_path = BASE_DIR / ".user_session"
+            if session_path.exists():
+                import json as _json
+                session_data = _json.loads(session_path.read_text())
+                if session_data.get("username"):
+                    username = session_data["username"]
+                if session_data.get("key"):
+                    key = session_data["key"]
+        except Exception:
+            pass
+    
     data = _load_json(TRACK_FILE, {"users": {}})
     
     if hwid not in data.get("users", {}):
-        register_user(username, key)
-        data = _load_json(TRACK_FILE, {"users": {}})
+        data.setdefault("users", {})[hwid] = {
+            "hwid": hwid,
+            "username": username or "unknown",
+            "first_seen": datetime.now().isoformat(),
+        }
     
     user = data["users"][hwid]
     user["tamper_attempts"] = user.get("tamper_attempts", 0) + 1
     user["last_tamper"] = datetime.now().isoformat()
     user["last_tamper_files"] = files_modified
-    
-    # NO AUTO-SUSPEND — notify admin lang
-    pass
+    user["last_seen"] = datetime.now().isoformat()
+    if username and username != "unknown":
+        user["username"] = username
+    if key and key != "unknown":
+        user["key_used"] = key
     
     _save_json(TRACK_FILE, data)
     
-    # Notify admin
+    # Build notification
+    display_username = username if username and username != "unknown" else "Unknown (not logged in)"
+    display_key = key if key and key != "unknown" else "Not logged in"
+    
     msg = (
         f"<b>🚨 TAMPER DETECTED</b>\n\n"
-        f"👤 Username: <b>{username or 'unknown'}</b>\n"
+        f"👤 Username: <b>{display_username}</b>\n"
         f"🆔 HWID: <code>{hwid}</code>\n"
-        f"🔑 Key: <code>{key or 'unknown'}</code>\n\n"
+        f"🔑 Key: <code>{display_key}</code>\n\n"
         f"📁 Modified files:\n"
     )
     for f in files_modified[:5]:
@@ -253,6 +290,7 @@ def report_tamper(files_modified, username=None, key=None):
     
     _notify_admin(msg, urgent=True)
     return True
+
 
 
 def report_leak_detected(leaked_to=None, extra_info=None):
