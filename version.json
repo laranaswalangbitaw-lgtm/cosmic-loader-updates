@@ -1,0 +1,20 @@
+{
+  "version": "4.1.5",
+  "changelog": [
+    "Use GitHub API for fresh keys (no cache)"
+  ],
+  "release_date": "2026-09-17",
+  "files": [
+    "cosmicloaderFORSALE.py",
+    "security.py",
+    "updater.py",
+    "tracking.py",
+    "dns_fix.py",
+    "decoder_encoder.py",
+    "url_remover.py",
+    "proxy_scraper.py",
+    "sms_bomber.py",
+    "separator.py",
+    "Dev_Id_checker.py"
+  ]
+}

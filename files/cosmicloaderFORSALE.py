@@ -178,7 +178,7 @@ except Exception as _e:
 # ══════════════════════════════════════════════════════════════════════════
 
 # CLOUD KEYS (source of truth)
-CLOUD_KEYS_URL = "https://raw.githubusercontent.com/laranaswalangbitaw-lgtm/cosmic-loader-updates/main/files/keys.json"
+CLOUD_KEYS_URL = "https://api.github.com/repos/laranaswalangbitaw-lgtm/cosmic-loader-updates/contents/files/keys.json"
 
 # LOCAL CACHE
 KEYS_FILE_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/keys.json")
