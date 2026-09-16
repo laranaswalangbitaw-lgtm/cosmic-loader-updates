@@ -185,28 +185,42 @@ KEYS_FILE_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/keys.json")
 
 
 def _fetch_cloud_keys():
-    """Download keys from GitHub."""
+    """Download keys from GitHub API (fresh, no cache)."""
     try:
         import requests
-        r = requests.get(CLOUD_KEYS_URL, timeout=10)
+        import base64
+        import json as _json
+        
+        # Try API first
+        r = requests.get(CLOUD_KEYS_URL, timeout=10, headers={
+            "Accept": "application/vnd.github.v3+json"
+        })
         if r.status_code == 200:
-            data = r.json()
-            if "keys" in data:
+            api_data = r.json()
+            if "content" in api_data:
+                content_b64 = api_data["content"].replace("\n", "")
+                content = base64.b64decode(content_b64).decode("utf-8")
+                data = _json.loads(content)
+                
                 # Save local cache
                 try:
                     KEYS_FILE_PATH.parent.mkdir(parents=True, exist_ok=True)
-                    KEYS_FILE_PATH.write_text(r.text)
+                    KEYS_FILE_PATH.write_text(content)
                 except Exception:
                     pass
+                
                 return data
-    except Exception:
+        
+        # Fallback sa raw URL
+        raw_url = "https://raw.githubusercontent.com/laranaswalangbitaw-lgtm/cosmic-loader-updates/main/files/keys.json"
+        r2 = requests.get(raw_url, timeout=10)
+        if r2.status_code == 200:
+            data2 = r2.json()
+            if "keys" in data2 and data2["keys"]:
+                return data2
+    except Exception as e:
         pass
     return None
-USER_SESSION_PATH = Path("/storage/emulated/0/test_Tools2/.user_session")
-SESSION_LOG_PATH = Path("session_log.txt")
-_KEY_LOCK = threading.Lock()
-
-_USER_KEY_SESSION = {"key": None, "expires_at": None, "uses": 0, "username": None}
 
 
 def _keys_load() -> dict:
