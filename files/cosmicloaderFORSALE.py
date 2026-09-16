@@ -182,6 +182,8 @@ CLOUD_KEYS_URL = "https://api.github.com/repos/laranaswalangbitaw-lgtm/cosmic-lo
 
 # LOCAL CACHE
 KEYS_FILE_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/keys.json")
+USER_SESSION_PATH = Path("/storage/emulated/0/COSMIC-LOADER-v4.0/.user_session")
+_USER_KEY_SESSION = {"key": None, "expires_at": None, "uses": 0, "username": None}
 
 
 def _fetch_cloud_keys():
