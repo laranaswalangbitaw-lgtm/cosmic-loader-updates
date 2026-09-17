@@ -5065,7 +5065,20 @@ def bulk_check():
     file_viewer = AccountFileViewer()
     combo_files = file_manager.scan_combo_folder()
     if not combo_files:
-        _log('ERROR', "No combo files found in 'Combo' folder. Add .txt files and retry.")
+        clear_screen()
+        display_banner()
+        w = 66
+        print()
+        print(f"  {_A_ERROR}┏{'━' * w}┓{_A_RST}")
+        print(f"  {_A_ERROR}┃{_A_RST}{_A_BOLD}{_A_BRIGHT}{'⚠  NO COMBO FILES FOUND'.center(w)}{_A_RST}{_A_ERROR}┃{_A_RST}")
+        print(f"  {_A_ERROR}┣{'━' * w}┫{_A_RST}")
+        print(f"  {_A_ERROR}┃{_A_RST}  {_A_DIM}Add .txt files to:{_A_RST}")
+        print(f"  {_A_ERROR}┃{_A_RST}  {_A_BRIGHT}/storage/emulated/0/COSMIC-LOADER-v4.0/Combo/{_A_RST}")
+        print(f"  {_A_ERROR}┃{_A_RST}")
+        print(f"  {_A_ERROR}┃{_A_RST}  {_A_DIM}Format: email:password{_A_RST}")
+        print(f"  {_A_ERROR}┗{'━' * w}┛{_A_RST}")
+        print()
+        input(f"  {_A_DIM}Press Enter to continue...{_A_RST} ")
         return
     file_infos = [info for fp in combo_files for info in [file_manager.get_file_info(fp)] if info]
     if not file_infos:

@@ -1,5 +1,9 @@
 {
-  "version": "4.1.7",
-  "changelog": ["Restore variables", "API fetch working", "Prevent auto-update overwrite"],
+  "version": "4.1.8",
+  "changelog": [
+    "Improved bulk_check error message",
+    "Show combo folder path",
+    "Better user guidance"
+  ],
   "release_date": "2026-09-17"
 }
