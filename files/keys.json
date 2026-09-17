@@ -104,6 +104,21 @@
       "price": "6",
       "created_by": 8792731943,
       "order_id": "ORD-260916-KU7S"
+    },
+    "COSMIC-JXL7-Y54O-PLQ7-MTHI": {
+      "key": "COSMIC-JXL7-Y54O-PLQ7-MTHI",
+      "duration_code": "permanent",
+      "duration_label": "Permanent",
+      "created_at": "2026-09-17T21:14:25.606833",
+      "expires_at": null,
+      "uses": 0,
+      "bound_to": null,
+      "bound_at": null,
+      "revoked": false,
+      "note": "Thanks",
+      "price": "105",
+      "created_by": 8792731943,
+      "order_id": "ORD-260917-MTHI"
     }
   }
 }
