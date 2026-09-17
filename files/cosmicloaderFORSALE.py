@@ -64,6 +64,13 @@ except Exception as _e:
     _URL_RM_ERROR = str(_e)
 
 
+# ── Thread Manager Module ──────────────────────────────────────
+try:
+    import thread_manager as _thread_mgr
+    _THREAD_MGR_AVAILABLE = True
+except Exception as _e:
+    _THREAD_MGR_AVAILABLE = False
+
 # ── Combo Generator Module ─────────────────────────────────────
 try:
     import combo_generator as _combo_gen
@@ -5924,6 +5931,27 @@ def run_url_remover():
     print("URL Remover not available")
 
 
+def run_account_manager():
+    """Wrapper: launch account manager module."""
+    if _ACC_MGR_AVAILABLE:
+        return _acc_mgr.run_account_manager()
+    print("Account manager not available")
+
+
+def run_combo_generator():
+    """Wrapper: launch combo generator module."""
+    if _COMBO_GEN_AVAILABLE:
+        return _combo_gen.run_combo_generator()
+    print("Combo generator not available")
+
+
+def run_thread_manager():
+    """Wrapper: launch thread manager module."""
+    if _THREAD_MGR_AVAILABLE:
+        return _thread_mgr.run_thread_manager()
+    print("Thread manager not available")
+
+
 def main():
     Path("Combo").mkdir(exist_ok=True)
     Path("Results").mkdir(exist_ok=True)
@@ -6132,7 +6160,7 @@ def main():
                 print(f"\n  {_A_ERROR}✖  Access denied. Exiting.{_A_RST}\n")
                 sys.exit(1)
 
-                elif choice == "10":
+        elif choice == "10":
             if _ACC_MGR_AVAILABLE:
                 _acc_mgr.run_account_manager()
             else:
@@ -6150,7 +6178,7 @@ def main():
                 print(f"\n  {_A_ERROR}✖  combo_generator.py not found!{_A_RST}")
                 input(f"\n  {_A_DIM}Press Enter…{_A_RST} ")
 
-elif choice == "q":
+        elif choice == "q":
             break
             
 if __name__ == '__main__':

@@ -22,7 +22,7 @@ VERSION_FILE = Path(__file__).parent / "version.json"
 UPDATE_CACHE = Path(__file__).parent / ".update_cache"
 
 # Current version — update mo 'to every release
-CURRENT_VERSION = "4.1.7"
+CURRENT_VERSION = "4.3.0"
 
 # Cache TTL (seconds) — huwag mag-check every run (para mabilis)
 CACHE_TTL = 3600  # 1 hour

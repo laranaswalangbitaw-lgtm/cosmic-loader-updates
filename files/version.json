@@ -1,5 +1,5 @@
 {
-  "version": "4.1.7",
-  "changelog": ["Restore variables", "API fetch working", "Prevent auto-update overwrite"],
+  "version": "4.3.0",
+  "changelog": ["Week 1: Account Manager", "Week 2: Combo Generator", "Week 3: Thread Manager"],
   "release_date": "2026-09-17"
 }
