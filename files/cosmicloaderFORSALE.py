@@ -17,7 +17,6 @@ import time
 import urllib.parse
 import uuid
 import secrets
-import string
 import platform
 import uuid as _uuid
 from collections import deque
@@ -221,43 +220,8 @@ def _fetch_cloud_keys():
             if "keys" in data2 and data2["keys"]:
                 return data2
     except Exception as e:
-        passcd /storage/emulated/0/COSMIC-LOADER-v4.0
+        pass
 
-echo "═══════════════════════════════════════════════════════════"
-echo "  BULK CHECK DIAGNOSTIC"
-echo "═══════════════════════════════════════════════════════════"
-
-echo ""
-echo "═══ 1. CHECK bulk_check FUNCTION ═══"
-grep -n "def bulk_check" cosmicloaderFORSALE.py
-
-echo ""
-echo "═══ 2. CHECK COMBO FOLDER ═══"
-ls -la Combo/ 2>&1
-
-echo ""
-echo "═══ 3. TEST BULK CHECK ═══"
-python3 -c "
-try:
-    import cosmicloaderFORSALE as c
-    print('✅ Module loaded')
-    
-    if hasattr(c, 'bulk_check'):
-        print(f'✅ bulk_check exists')
-        print(f'   Signature: {c.bulk_check.__code__.co_varnames[:5]}')
-    else:
-        print('❌ bulk_check missing')
-except Exception as e:
-    print(f'❌ Error: {e}')
-"
-
-echo ""
-echo "═══ 4. CHECK MAIN MENU HANDLER ═══"
-grep -n 'choice == "1"' cosmicloaderFORSALE.py | head -3
-
-echo ""
-echo "═══════════════════════════════════════════════════════════"
-    return None
 
 
 def _keys_load() -> dict:

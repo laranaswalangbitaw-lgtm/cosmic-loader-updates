@@ -1,22 +1,5 @@
 {
-  "version": "4.1.3",
-  "changelog": [
-    "Enhanced tamper notifications",
-    "Complete user info",
-    "Save session on login"
-  ],
-  "release_date": "2026-09-16",
-  "files": [
-    "cosmicloaderFORSALE.py",
-    "security.py",
-    "updater.py",
-    "tracking.py",
-    "dns_fix.py",
-    "decoder_encoder.py",
-    "url_remover.py",
-    "proxy_scraper.py",
-    "sms_bomber.py",
-    "separator.py",
-    "Dev_Id_checker.py"
-  ]
+  "version": "4.1.7",
+  "changelog": ["Restore variables", "API fetch working", "Prevent auto-update overwrite"],
+  "release_date": "2026-09-17"
 }
