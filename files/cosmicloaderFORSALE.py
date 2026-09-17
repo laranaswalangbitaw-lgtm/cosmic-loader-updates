@@ -64,6 +64,13 @@ except Exception as _e:
     _URL_RM_ERROR = str(_e)
 
 
+# ── Combo Generator Module ─────────────────────────────────────
+try:
+    import combo_generator as _combo_gen
+    _COMBO_GEN_AVAILABLE = True
+except Exception as _e:
+    _COMBO_GEN_AVAILABLE = False
+
 # ── Account Manager Module ─────────────────────────────────────
 try:
     import account_manager as _acc_mgr
@@ -4450,7 +4457,7 @@ def prompt_proxy_setup():
 
     while True:
         choice = _ask("Select mode (1-3, default 2): ") or "2"
-        if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"):
+        if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"):
             break
         _err("Invalid choice. Enter 1-7.")
     print()
@@ -5703,6 +5710,7 @@ def display_main_menu() -> str:
 
     ("9", "▸ Logout Key",       "— clear session and re-login",      _A_WARNING),
     ("10", "▸ Account Manager",  "— view + filter results dashboard", _A_SUCCESS),
+    ("11", "▸ Combo Generator",  "— auto-generate email:pass", _A_PRIMARY),
     ]:
         key_part   = f"{color}[{_A_BOLD}{num}{_A_RST}{color}]{_A_RST}"
         label_part = f"{_A_BRIGHT}{_A_BOLD}{label}{_A_RST}"
@@ -5728,13 +5736,13 @@ def display_main_menu() -> str:
     print(f"  {_A_DIM}{'─' * w}{_A_RST}")
     print()
 
-    prompt = f"  {_A_ACCENT}❯ Select [1-10]:{_A_RST} "
+    prompt = f"  {_A_ACCENT}❯ Select [1-11]:{_A_RST} "
     while True:
         try:
             choice = input(prompt).strip()
-            if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"):
+            if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"):
                 return choice
-            print(f"  {_A_ERROR}✖ Enter 1-10.{_A_RST}")
+            print(f"  {_A_ERROR}✖ Enter 1-11.{_A_RST}")
         except KeyboardInterrupt:
             print()
             return "q"
@@ -6131,6 +6139,15 @@ def main():
                 clear_screen()
                 display_banner()
                 print(f"\n  {_A_ERROR}✖  account_manager.py not found!{_A_RST}")
+                input(f"\n  {_A_DIM}Press Enter…{_A_RST} ")
+
+        elif choice == "11":
+            if _COMBO_GEN_AVAILABLE:
+                _combo_gen.run_combo_generator()
+            else:
+                clear_screen()
+                display_banner()
+                print(f"\n  {_A_ERROR}✖  combo_generator.py not found!{_A_RST}")
                 input(f"\n  {_A_DIM}Press Enter…{_A_RST} ")
 
 elif choice == "q":
