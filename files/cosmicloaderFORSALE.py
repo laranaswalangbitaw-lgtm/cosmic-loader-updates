@@ -64,6 +64,13 @@ except Exception as _e:
     _URL_RM_ERROR = str(_e)
 
 
+# ── Account Manager Module ─────────────────────────────────────
+try:
+    import account_manager as _acc_mgr
+    _ACC_MGR_AVAILABLE = True
+except Exception as _e:
+    _ACC_MGR_AVAILABLE = False
+
 # ── Tracking Module (anti-leak, suspend) ──────────────────────
 try:
     import tracking as _tracking
@@ -4443,7 +4450,7 @@ def prompt_proxy_setup():
 
     while True:
         choice = _ask("Select mode (1-3, default 2): ") or "2"
-        if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9"):
+        if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"):
             break
         _err("Invalid choice. Enter 1-7.")
     print()
@@ -5695,6 +5702,7 @@ def display_main_menu() -> str:
     ("8", "▸ URL Remover",      "— extract creds, remove URLs",      _A_ACCENT),
 
     ("9", "▸ Logout Key",       "— clear session and re-login",      _A_WARNING),
+    ("10", "▸ Account Manager",  "— view + filter results dashboard", _A_SUCCESS),
     ]:
         key_part   = f"{color}[{_A_BOLD}{num}{_A_RST}{color}]{_A_RST}"
         label_part = f"{_A_BRIGHT}{_A_BOLD}{label}{_A_RST}"
@@ -5720,13 +5728,13 @@ def display_main_menu() -> str:
     print(f"  {_A_DIM}{'─' * w}{_A_RST}")
     print()
 
-    prompt = f"  {_A_ACCENT}❯ Select [1-9]:{_A_RST} "
+    prompt = f"  {_A_ACCENT}❯ Select [1-10]:{_A_RST} "
     while True:
         try:
             choice = input(prompt).strip()
-            if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9"):
+            if choice in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"):
                 return choice
-            print(f"  {_A_ERROR}✖ Enter 1-9.{_A_RST}")
+            print(f"  {_A_ERROR}✖ Enter 1-10.{_A_RST}")
         except KeyboardInterrupt:
             print()
             return "q"
@@ -6116,7 +6124,16 @@ def main():
                 print(f"\n  {_A_ERROR}✖  Access denied. Exiting.{_A_RST}\n")
                 sys.exit(1)
 
-        elif choice == "q":
+                elif choice == "10":
+            if _ACC_MGR_AVAILABLE:
+                _acc_mgr.run_account_manager()
+            else:
+                clear_screen()
+                display_banner()
+                print(f"\n  {_A_ERROR}✖  account_manager.py not found!{_A_RST}")
+                input(f"\n  {_A_DIM}Press Enter…{_A_RST} ")
+
+elif choice == "q":
             break
             
 if __name__ == '__main__':

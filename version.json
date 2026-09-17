@@ -1,9 +1,7 @@
 {
-  "version": "4.1.8",
+  "version": "4.2.0",
   "changelog": [
-    "Improved bulk_check error message",
-    "Show combo folder path",
-    "Better user guidance"
+    "Week 1: Account Manager Dashboard"
   ],
   "release_date": "2026-09-17"
 }
